@@ -20,9 +20,13 @@ function App() {
   return (
     <div className="App">
       <h1>Connect teact with django</h1>
-      <h3>{students[0].stuname}</h3>
-      <h3>{students[0].email}</h3>
-
+      {
+        students.map((student,i)=>{
+          return(
+            <h2 key={i}>{student.stuname}{student.email}</h2>
+          )
+        })
+      }
     </div>
   );
 }
