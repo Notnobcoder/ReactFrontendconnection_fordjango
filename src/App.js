@@ -1,23 +1,28 @@
 import logo from './logo.svg';
+import axios from "axios"
+import {useEffect, useState} from "react"
 import './App.css';
 
 function App() {
+  const [students,setStudents]=useState([])
+  useEffect(()=>{
+    async function getAllStudents(){
+      try{
+        const students=await axios.get("http://localhost:8000/api/student/")
+        console.log(students.data);
+        setStudents(students.data)
+        }catch(error){
+          console.log(error)
+        } 
+    }
+    getAllStudents()
+  },[])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Connect teact with django</h1>
+      <h3>{students[0].stuname}</h3>
+      <h3>{students[0].email}</h3>
+
     </div>
   );
 }
